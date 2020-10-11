@@ -13,3 +13,11 @@ export * from './monthlySubscriptionPlanService/MonthlySubscriptionPlanService';
 export * from './guardiansService/IGuardiansService';
 export * from './guardiansService/GuardiansService';
 export * from './guardiansService/GuardiansServiceConstants';
+
+// Delegations service
+export * from './delegationsService/IDelegationsService';
+export * from './delegationsService/DelegationsService';
+
+// Committee service
+export * from './committeeService/ICommitteeService';
+export * from './committeeService/CommitteeService';
