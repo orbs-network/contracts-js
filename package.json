@@ -1,5 +1,5 @@
 {
-  "name": "contracts-js",
+  "name": "@orbs-network/contracts-js",
   "version": "0.0.1",
   "description": "Provides easy yo use JS (TS) interfaces to interact with the Orbs Ethereum contracts",
   "main": "dist/index.js",
