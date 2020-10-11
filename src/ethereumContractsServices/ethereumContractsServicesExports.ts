@@ -1,3 +1,6 @@
+// MainNet contract addresses
+export * from './mainnetAddresses';
+
 // Subscriptions service
 export * from './subscriptionService/ISubscriptionsService';
 export * from './subscriptionService/SubscriptionsService';

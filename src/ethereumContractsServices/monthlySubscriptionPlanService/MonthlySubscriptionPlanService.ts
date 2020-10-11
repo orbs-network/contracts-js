@@ -12,9 +12,9 @@ import {
   fullOrbsFromWeiOrbs,
   weiOrbsFromFullOrbs,
 } from "../../cryptoUtils/unitConverter";
+import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 
-const MAIN_NET_MONTHLY_SUBSCRIPTION_PLAN_CONTRACT_ADDRESS =
-  "0xb2e3e952ba99a3eab76eddf85a2d387e3d9d335b";
+const MAIN_NET_MONTHLY_SUBSCRIPTION_PLAN_CONTRACT_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.monthlySubscriptionPlanContract;
 
 export class MonthlySubscriptionPlanService
   implements IMonthlySubscriptionPlanService {
