@@ -1,0 +1,14 @@
+{
+  "name": "contracts-js",
+  "version": "0.0.1",
+  "description": "Provides easy yo use JS (TS) interfaces to interact with the Orbs Ethereum contracts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "orbs"
+  ],
+  "author": "Or Lavy",
+  "license": "ISC"
+}
