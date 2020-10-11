@@ -15,7 +15,6 @@ import {
 import { ipv4ToHex } from "../../utils/ipHexConversionUtils";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 
-// TODO : O.L : Fill it up after deploying,
 const MAIN_NET_GUARDIANS_REGISTRATION_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.guardiansContract;
 
 export class GuardiansService implements IGuardiansService {
