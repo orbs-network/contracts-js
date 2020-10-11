@@ -11,7 +11,7 @@ import { PromiEvent, TransactionReceipt } from "web3-core";
 import {
   fullOrbsFromWeiOrbs,
   weiOrbsFromFullOrbs,
-} from "../../cryptoUtils/unitConverter";
+} from "../../utils/cryptoUnitConverter";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 
 const MAIN_NET_MONTHLY_SUBSCRIPTION_PLAN_CONTRACT_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.monthlySubscriptionPlanContract;
