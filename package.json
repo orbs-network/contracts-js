@@ -2,9 +2,16 @@
   "name": "contracts-js",
   "version": "0.0.1",
   "description": "Provides easy yo use JS (TS) interfaces to interact with the Orbs Ethereum contracts",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orbs-network/contracts-js.git"
   },
   "keywords": [
     "orbs"
