@@ -1,7 +1,7 @@
 {
   "name": "@orbs-network/contracts-js",
   "version": "0.0.1",
-  "description": "Provides easy yo use JS (TS) interfaces to interact with the Orbs Ethereum contracts",
+  "description": "Provides easy to use JS (TS) interfaces to interact with the Orbs Ethereum contracts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -25,5 +25,8 @@
     "@typechain/web3-v1": "^1.0.0",
     "typechain": "^2.0.1",
     "web3": "^1.3.0"
+  },
+  "devDependencies": {
+    "release-it": "^14.1.0"
   }
 }
