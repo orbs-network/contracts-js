@@ -48,7 +48,7 @@ export class OrbsTokenService implements IOrbsTokenService {
     ownerAddress: string,
     spenderAddress: string,
     callback: OrbsAllowanceChangeCallback,
-  ) {
+  ) : () => Promise<boolean> {
     const specificEventEmitter = this.erc20TokenContract.events.Approval(
       {
         filter: {
