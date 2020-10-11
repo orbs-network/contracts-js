@@ -7,6 +7,8 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
+    "postinstall": "npm run generate_types",
+    "generate_types": "typechain --target web3-v1 --outDir ./src/contracts './node_modules/@orbs-network/orbs-ethereum-contracts-v2/build/contracts/*.json'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +19,11 @@
     "orbs"
   ],
   "author": "Or Lavy",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@orbs-network/orbs-ethereum-contracts-v2": "0.0.25",
+    "@typechain/web3-v1": "^1.0.0",
+    "typechain": "^2.0.1",
+    "web3": "^1.3.0"
+  }
 }

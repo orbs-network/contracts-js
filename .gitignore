@@ -1,5 +1,11 @@
 # BUILD
 dist
 
+# Generated
+src/contracts
+
+# node modules
+node_modules
+
 # IDEA
 .idea
