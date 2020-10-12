@@ -13,7 +13,7 @@ import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 import {IOrbsTokenService, OrbsAllowanceChangeCallback} from "./IOrbsTokenService";
 import Erc20ContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/ERC20.json";
 import { Erc20 } from "../../contracts/ERC20";
-import {getUnsubscribePromise} from "../..";
+import {getUnsubscribePromise, TUnsubscribeFunction} from "../..";
 
 const MAIN_NET_ERC_TOKEN_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.ercToken;
 
@@ -48,7 +48,7 @@ export class OrbsTokenService implements IOrbsTokenService {
     ownerAddress: string,
     spenderAddress: string,
     callback: OrbsAllowanceChangeCallback,
-  ) : () => Promise<boolean> {
+  ) : TUnsubscribeFunction {
     const specificEventEmitter = this.erc20TokenContract.events.Approval(
       {
         filter: {

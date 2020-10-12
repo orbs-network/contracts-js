@@ -5,7 +5,7 @@ import { Subscription } from 'web3-core-subscriptions';
  * If the event is not yet subscribed (and so, has 'id' value of null) the 'unsubscribe' call will not work and the CB will get called.
  * Therefore we will wait until it is connected in order to disconnect it.
  */
-export function getUnsubscribePromise(eventEmitter: Subscription<EventData>) {
+export function getUnsubscribePromise(eventEmitter: Subscription<EventData>): Promise<boolean|undefined> {
   let unsubscribePromise: Promise<boolean|undefined>;
 
   if (eventEmitter.id === null) {

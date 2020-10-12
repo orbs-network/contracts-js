@@ -1,6 +1,9 @@
 // MainNet contract addresses
 export * from './mainnetAddresses';
 
+// Added types
+export * from './contractsTypes/contractTypes';
+
 // ERC 20 Token
 export * from './orbsTokenService/IOrbsTokenService';
 export * from './orbsTokenService/OrbsTokenService';

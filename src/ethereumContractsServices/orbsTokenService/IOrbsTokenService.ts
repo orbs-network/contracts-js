@@ -6,6 +6,7 @@
  * The above notice should be included in all copies or substantial portions of the software.
  */
 import { PromiEvent, TransactionReceipt } from 'web3-core';
+import {TUnsubscribeFunction} from "../..";
 
 export type OrbsAllowanceChangeCallback = (error: Error|null, allowance: bigint) => void;
 
@@ -24,5 +25,5 @@ export interface IOrbsTokenService {
     ownerAddress: string,
     spenderAddress: string,
     callback: OrbsAllowanceChangeCallback,
-  ): () => Promise<boolean>;
+  ): TUnsubscribeFunction;
 }
