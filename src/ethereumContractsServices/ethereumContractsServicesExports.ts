@@ -1,6 +1,10 @@
 // MainNet contract addresses
 export * from './mainnetAddresses';
 
+// ERC 20 Token
+export * from './orbsTokenService/IOrbsTokenService';
+export * from './orbsTokenService/OrbsTokenService';
+
 // Subscriptions service
 export * from './subscriptionService/ISubscriptionsService';
 export * from './subscriptionService/SubscriptionsService';
