@@ -13,7 +13,8 @@ import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 import {IOrbsTokenService, OrbsAllowanceChangeCallback} from "./IOrbsTokenService";
 import Erc20ContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/ERC20.json";
 import { Erc20 } from "../../contracts/ERC20";
-import {getUnsubscribePromise, TUnsubscribeFunction} from "../..";
+import {TUnsubscribeFunction} from "../contractsTypes/contractTypes";
+import {getUnsubscribePromise} from '../../utils/erc20EventsUtils';
 
 const MAIN_NET_ERC_TOKEN_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.ercToken;
 

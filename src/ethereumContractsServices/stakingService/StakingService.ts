@@ -10,14 +10,11 @@ import Web3 from 'web3';
 import { PromiEvent, TransactionReceipt } from 'web3-core';
 import { AbiItem } from 'web3-utils';
 import { IStakingService, IUnstakingStatus, StakingServiceEventCallback } from './IStakingService';
-import {
-  getUnsubscribePromise,
-  ORBS_MAIN_NET_CONTRACT_ADDRESSES, TContractEventSubscribeFunction,
-  TUnsubscribeFunction
-} from "../..";
 import StakingContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/StakingContract.json";
 import { StakingContract } from "../../contracts/StakingContract";
 import {ContractEventLog} from "../../contracts/types";
+import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from '../mainnetAddresses';
+import {TUnsubscribeFunction, TContractEventSubscribeFunction} from '../contractsTypes/contractTypes';
 
 /**
  * It just so happens that all of the staking related events have the same signature.

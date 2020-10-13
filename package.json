@@ -22,9 +22,9 @@
   "author": "Or Lavy",
   "license": "ISC",
   "dependencies": {
-    "@orbs-network/orbs-ethereum-contracts-v2": "0.0.25",
+    "@orbs-network/orbs-ethereum-contracts-v2": "0.0.26",
     "@typechain/web3-v1": "^1.0.0",
-    "typechain": "^2.0.1",
+    "typechain": "^3.0.0",
     "web3": "^1.3.0"
   },
   "devDependencies": {
