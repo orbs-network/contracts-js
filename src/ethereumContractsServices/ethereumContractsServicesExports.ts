@@ -28,3 +28,7 @@ export * from './delegationsService/DelegationsService';
 // Committee service
 export * from './committeeService/ICommitteeService';
 export * from './committeeService/CommitteeService';
+
+// Staking service
+export * from './stakingService/IStakingService';
+export * from './stakingService/StakingService';
