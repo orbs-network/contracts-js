@@ -5,6 +5,7 @@ export interface ICryptoWalletConnectionService {
   readonly isSemiCompliantEthereumProviderInstalled: boolean;
 
   // Getters
+  readEthereumBalance: (address: string) => Promise<number>;
   didUserApproveDappInThePast: boolean;
   readMainAddress: () => Promise<string>;
   readCurrentBlockNumber: () => Promise<number>;
