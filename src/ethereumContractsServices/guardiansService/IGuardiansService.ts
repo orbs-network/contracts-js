@@ -9,8 +9,10 @@ export interface IGuardiansService {
   ) => Promise<number>;
 
   readGuardianId: (address: string) => Promise<string | null>;
-
   setGuardianId: (guardianId: string) => PromiEvent<TransactionReceipt>;
+
+  readGuardianDetailsPageUrl: (address: string) => Promise<string | null>;
+  setGuardianDetailsPageUrl: (detailsPageUrl: string) => PromiEvent<TransactionReceipt>;
 
   /**
    *

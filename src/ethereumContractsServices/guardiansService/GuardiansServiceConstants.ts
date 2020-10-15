@@ -2,6 +2,7 @@ export const GUARDIANS_SERVICE_CONSTANTS = {
     metadataKeys: {
         rewardsFrequency: 'REWARDS_FREQUENCY_SEC',
         guardianId: 'GUARDIAN_ID',
+        guardianDetailsPageUrl: 'DETAILS_PAGE_URL',
     },
     /**
      * The value that will return for a guardian that did not change its distribution frequency.

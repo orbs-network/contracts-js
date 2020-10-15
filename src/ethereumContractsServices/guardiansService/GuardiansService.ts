@@ -101,6 +101,24 @@ export class GuardiansService implements IGuardiansService {
       .send();
   }
 
+  public async readGuardianDetailsPageUrl(address: string): Promise<string | null> {
+    const guardianDetailsPageUrl = await this.guardiansRegistrationContract.methods
+        .getMetadata(address, GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianDetailsPageUrl)
+        .call();
+
+    if (!guardianDetailsPageUrl || !guardianDetailsPageUrl.length) {
+      return null;
+    }
+
+    return guardianDetailsPageUrl;
+  }
+
+  public setGuardianDetailsPageUrl(detailsPageUrl: string): PromiEvent<TransactionReceipt> {
+    return this.guardiansRegistrationContract.methods
+        .setMetadata(GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianDetailsPageUrl, detailsPageUrl)
+        .send();
+  }
+
   public setGuardianDistributionFrequency(
     frequencyInSeconds: number
   ): PromiEvent<TransactionReceipt> {
