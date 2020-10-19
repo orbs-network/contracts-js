@@ -9,6 +9,7 @@ import { AbiItem } from "web3-utils";
 import StakingRewardsContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/StakingRewards.json";
 import { StakingRewards } from "../../contracts/StakingRewards";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
+import {fullOrbsFromWeiOrbs} from '../../utils/cryptoUnitConverter';
 
 // DEV_NOTE : The value is between 0-100% with precision of 0.001,
 //            The value is save as an integer in the contract, 0-100,000.
@@ -34,6 +35,7 @@ export class StakingRewardsService implements IStakingRewardsService {
     this.stakingRewardsContract.options.from = address;
   }
 
+  // **** Setting reading ****
   public async readContractRewardsSettings(): Promise<
     TRewardsContractSettings
   > {
@@ -72,6 +74,8 @@ export class StakingRewardsService implements IStakingRewardsService {
     return guardianRewardsSettings;
   }
 
+
+  // **** Reading ****
   public async readDelegatorsCutPercentage(address: string): Promise<number> {
     const cutPercentageInMillies = await this.stakingRewardsContract.methods
       .getGuardianDelegatorsStakingRewardsPercentMille(address)
@@ -84,6 +88,18 @@ export class StakingRewardsService implements IStakingRewardsService {
     return cutPercentage;
   }
 
+  public async readRewardsBalanceFullOrbs(address: string): Promise<number> {
+    const stakingRewardsBalanceWei = await this.stakingRewardsContract.methods
+      .getStakingRewardsBalance(address)
+      .call();
+
+    const stakingRewardsBalanceFullOrbs = fullOrbsFromWeiOrbs(stakingRewardsBalanceWei);
+
+    return stakingRewardsBalanceFullOrbs;
+  }
+
+
+  // **** Writing ****
   public setDelegatorsCutPercentage(
     delegatorsCutPercentage: number
   ): PromiEvent<TransactionReceipt> {
@@ -94,6 +110,11 @@ export class StakingRewardsService implements IStakingRewardsService {
     return this.stakingRewardsContract.methods
       .setGuardianDelegatorsStakingRewardsPercentMille(delegatorsCutInMillies)
       .send();
+  }
+
+  // **** Actions ****
+  public claimRewards(address: string) : PromiEvent<TransactionReceipt> {
+    return this.stakingRewardsContract.methods.claimStakingRewards(address).send();
   }
 }
 

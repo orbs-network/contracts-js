@@ -12,12 +12,24 @@ export type TGuardianRewardsSettings = {
 
 export interface IStakingRewardsService {
   setFromAccount: (address: string) => void;
+  // Setting reading
   readContractRewardsSettings: () => Promise<TRewardsContractSettings>;
-  readDelegatorsCutPercentage: (address: string) => Promise<number>;
   readGuardianRewardsSettings: (
     address: string
   ) => Promise<TGuardianRewardsSettings>;
+
+  // Reading
+  readDelegatorsCutPercentage: (address: string) => Promise<number>;
+  /**
+   * Reads the balance in full orbs
+   */
+  readRewardsBalanceFullOrbs: (address: string) => Promise<number>;
+
+  // Writing
   setDelegatorsCutPercentage: (
     delegatorsCutPercentage: number
   ) => PromiEvent<TransactionReceipt>;
+
+  // Actions
+  claimRewards: (address: string) => PromiEvent<TransactionReceipt>;
 }
