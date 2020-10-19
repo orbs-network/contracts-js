@@ -6,7 +6,7 @@ import {
 import Web3 from "web3";
 import SubscriptionContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/Subscriptions.json";
 import { AbiItem } from "web3-utils";
-import { Subscriptions } from "../../contracts/Subscriptions";
+import {Subscriptions, VcCreated} from "../../contracts/Subscriptions";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 
 const MAIN_NET_SUBSCRIPTION_CONTRACT_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.subscriptionsContract;
@@ -42,19 +42,19 @@ export class SubscriptionsService implements ISubscriptionsService {
     blockNumber: number,
     ownerId: string
   ): Promise<TVcGist> {
-    const events = await this.subscriptionsContract.getPastEvents("VcCreated", {
+    const events: VcCreated[] = (await this.subscriptionsContract.getPastEvents("VcCreated", {
       address: ownerId,
       fromBlock: blockNumber,
       toBlock: blockNumber,
-    });
+    }) as any) as VcCreated[];
 
     // DEV_NOTE : O.L : There should be only one
     const event = events[0];
-    const { owner, vcid } = event.returnValues;
+    const { vcId } = event.returnValues;
 
     return {
-      owner,
-      vcId: vcid,
+      owner: ownerId,
+      vcId,
     };
   }
 }
