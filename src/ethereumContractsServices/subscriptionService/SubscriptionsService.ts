@@ -1,6 +1,6 @@
 import {
   ISubscriptionsService,
-  TReadVcDataResponse,
+  TReadVcDataResponse, TVcCreatedEvent,
   TVcGist,
 } from "./ISubscriptionsService";
 import Web3 from "web3";
@@ -59,7 +59,7 @@ export class SubscriptionsService implements ISubscriptionsService {
     };
   }
 
-  public async readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<VcCreated[]> {
+  public async readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<TVcCreatedEvent[]> {
     const pastEventOptions : PastEventOptions = {
       address: ownerId,
     };
@@ -70,6 +70,14 @@ export class SubscriptionsService implements ISubscriptionsService {
 
     const events: VcCreated[] = (await this.subscriptionsContract.getPastEvents('VcCreated', pastEventOptions) as any) as VcCreated[];
 
-    return events;
+    const vcCreatedEvents: TVcCreatedEvent[] = events.map(event => {
+      const vcCreatedEvent: TVcCreatedEvent = {
+        vcId: event.returnValues.vcId
+      };
+
+      return vcCreatedEvent;
+    })
+
+    return vcCreatedEvents;
   }
 }

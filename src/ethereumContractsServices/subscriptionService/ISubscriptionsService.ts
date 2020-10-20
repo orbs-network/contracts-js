@@ -1,11 +1,8 @@
-import {VcCreated as VcCreatedEvent} from "../../contracts/Subscriptions";
-export {VcCreated as VcCreatedEvent} from "../../contracts/Subscriptions";
-
 export interface ISubscriptionsService {
   setFromAccount(defaultAccountAddress: string): void;
   readVcData(vcid: string): Promise<TReadVcDataResponse>;
   readVcIdFromHistory(blockNumber: number, ownerId: string): Promise<TVcGist>;
-  readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<VcCreatedEvent[]>;
+  readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<TVcCreatedEvent[]>;
 }
 
 export type TVcGist = { vcId: string; owner: string };
@@ -20,3 +17,7 @@ export type TReadVcDataResponse = {
   deploymentSubset: string;
   isCertified: boolean;
 };
+
+export type TVcCreatedEvent = {
+  vcId: string,
+}
