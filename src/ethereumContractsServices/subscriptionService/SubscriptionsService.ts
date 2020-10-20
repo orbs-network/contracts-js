@@ -62,6 +62,7 @@ export class SubscriptionsService implements ISubscriptionsService {
   public async readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<TVcCreatedEvent[]> {
     const pastEventOptions : PastEventOptions = {
       address: ownerId,
+      fromBlock: 0,
     };
 
     if (startFromBlock !== undefined) {
