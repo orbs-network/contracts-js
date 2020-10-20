@@ -1,9 +1,10 @@
-import { EventData } from "web3-eth-contract";
+import {VcCreated} from "../../contracts/Subscriptions";
 
 export interface ISubscriptionsService {
   setFromAccount(defaultAccountAddress: string): void;
   readVcData(vcid: string): Promise<TReadVcDataResponse>;
   readVcIdFromHistory(blockNumber: number, ownerId: string): Promise<TVcGist>;
+  readVcCreatedEvents(ownerId: string, startFromBlock?: number): Promise<VcCreated[]>;
 }
 
 export type TVcGist = { vcId: string; owner: string };
