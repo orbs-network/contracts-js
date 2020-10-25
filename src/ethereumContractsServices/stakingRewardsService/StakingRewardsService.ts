@@ -76,6 +76,15 @@ export class StakingRewardsService implements IStakingRewardsService {
 
 
   // **** Reading ****
+  public async readTotalStakedInFullOrbs() : Promise<number> {
+    // TODO : FIX AFTER new TEST-KIT
+    return 0;
+    // const totalStaked = await this.stakingRewardsContract.methods.getTotalStakedTokens();
+    // const totalStakedInFullOrbs = fullOrbsFromWeiOrbs(totalStaked);
+    //
+    // return totalStakedInFullOrbs;
+  }
+
   public async readDelegatorsCutPercentage(address: string): Promise<number> {
     const cutPercentageInMillies = await this.stakingRewardsContract.methods
       .getGuardianDelegatorsStakingRewardsPercentMille(address)

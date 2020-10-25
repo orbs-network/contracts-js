@@ -5,6 +5,7 @@ import DelegationsContractJson from '@orbs-network/orbs-ethereum-contracts-v2/bu
 import { Delegations } from '../../contracts/Delegations';
 import { PromiEvent, TransactionReceipt } from 'web3-core';
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
+import {fullOrbsFromWeiOrbs} from "../..";
 
 const MAIN_NET_DELEGATIONS_CONTRACT_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.delegationsService;
 
@@ -24,6 +25,13 @@ export class DelegationsService implements IDelegationsService {
 
   readDelegation(fromAddress: string): Promise<string> {
     return this.delegationsContract.methods.getDelegation(fromAddress).call();
+  }
+
+  async readUncappedDelegatedStakeInFullOrbs() : Promise<number> {
+    const uncappedDelegatedStake = await this.delegationsContract.methods.uncappedDelegatedStake('-1').call();
+    const uncappedDelegatedStakeInFullOrbs = fullOrbsFromWeiOrbs(uncappedDelegatedStake);
+
+    return uncappedDelegatedStakeInFullOrbs;
   }
 
   delegate(delegationTargetAddress: string): PromiEvent<TransactionReceipt> {

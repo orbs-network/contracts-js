@@ -19,6 +19,7 @@ export interface IStakingRewardsService {
   ) => Promise<TGuardianRewardsSettings>;
 
   // Reading
+  readTotalStakedInFullOrbs() : Promise<number>;
   readDelegatorsCutPercentage: (address: string) => Promise<number>;
   /**
    * Reads the balance in full orbs
