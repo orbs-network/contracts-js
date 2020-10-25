@@ -76,15 +76,6 @@ export class StakingRewardsService implements IStakingRewardsService {
 
 
   // **** Reading ****
-  public async readTotalStakedInFullOrbs() : Promise<number> {
-    // TODO : FIX AFTER new TEST-KIT
-    return 0;
-    // const totalStaked = await this.stakingRewardsContract.methods.getTotalStakedTokens();
-    // const totalStakedInFullOrbs = fullOrbsFromWeiOrbs(totalStaked);
-    //
-    // return totalStakedInFullOrbs;
-  }
-
   public async readDelegatorsCutPercentage(address: string): Promise<number> {
     const cutPercentageInMillies = await this.stakingRewardsContract.methods
       .getGuardianDelegatorsStakingRewardsPercentMille(address)
@@ -98,11 +89,13 @@ export class StakingRewardsService implements IStakingRewardsService {
   }
 
   public async readRewardsBalanceFullOrbs(address: string): Promise<number> {
-    const stakingRewardsBalanceWei = await this.stakingRewardsContract.methods
+    const stakingRewardsBalance = await this.stakingRewardsContract.methods
       .getStakingRewardsBalance(address)
       .call();
 
-    const stakingRewardsBalanceFullOrbs = fullOrbsFromWeiOrbs(stakingRewardsBalanceWei);
+    const delegatorStakingRewardsBalanceFullOrbs = fullOrbsFromWeiOrbs(stakingRewardsBalance.delegatorStakingRewardsBalance);
+    const guardianStakingRewardsBalanceFullOrbs = fullOrbsFromWeiOrbs(stakingRewardsBalance.guardianStakingRewardsBalance);
+    const stakingRewardsBalanceFullOrbs = delegatorStakingRewardsBalanceFullOrbs + guardianStakingRewardsBalanceFullOrbs;
 
     return stakingRewardsBalanceFullOrbs;
   }
@@ -126,11 +119,14 @@ export class StakingRewardsService implements IStakingRewardsService {
   public async estimateFutureRewardsFullOrbs(address: string, durationInSeconds: number) : Promise<number> {
     return 0;
 
-    // const estimatedFutureRewards = this.stakingRewardsContract.methods.estimateFutureRewards(address, durationInSeconds).call();
+    const estimatedFutureRewards = await this.stakingRewardsContract.methods.estimateFutureRewards(address, durationInSeconds).call();
 
-    // const estimatedRewardsInFullOrbs = fullOrbsFromWeiOrbs(estimatedFutureRewards);
+    const estimatedDelegatorRewardsInFullOrbs = fullOrbsFromWeiOrbs(estimatedFutureRewards.estimatedDelegatorStakingRewards);
+    const estimatedGuardianRewardsInFullOrbs = fullOrbsFromWeiOrbs(estimatedFutureRewards.estimatedGuardianStakingRewards);
 
-    // return estimatedRewardsInFullOrbs;
+    const estimatedRewardsInFullOrbs = estimatedDelegatorRewardsInFullOrbs + estimatedGuardianRewardsInFullOrbs;
+
+    return estimatedRewardsInFullOrbs;
   }
 
   // **** Writing ****

@@ -25,6 +25,7 @@ export interface IStakingService {
   restake(): PromiEvent<TransactionReceipt>;
   withdraw(): PromiEvent<TransactionReceipt>;
 
+  readTotalStakedInFullOrbs() : Promise<number>;
   readStakeBalanceOf(stakeOwner: string): Promise<bigint>;
   readTotalStakedTokens(): Promise<bigint>;
   readUnstakeStatus(stakeOwner: string): Promise<IUnstakingStatus>;

@@ -15,6 +15,7 @@ import { StakingContract } from "../../contracts/StakingContract";
 import {ContractEventLog} from "../../contracts/types";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from '../mainnetAddresses';
 import {TUnsubscribeFunction, TContractEventSubscribeFunction} from '../contractsTypes/contractTypes';
+import {fullOrbsFromWeiOrbs} from "../..";
 
 /**
  * It just so happens that all of the staking related events have the same signature.
@@ -70,6 +71,13 @@ export class StakingService implements IStakingService {
   }
 
   // READ //
+  public async readTotalStakedInFullOrbs() : Promise<number> {
+    const totalStaked = await this.stakingContract.methods.getTotalStakedTokens().call();
+    const totalStakedInFullOrbs = fullOrbsFromWeiOrbs(totalStaked);
+
+    return totalStakedInFullOrbs;
+  }
+
   async readStakeBalanceOf(stakeOwner: string): Promise<bigint> {
     const stakedBalance = await this.stakingContract.methods.getStakeBalanceOf(stakeOwner).call();
 
