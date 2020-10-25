@@ -24,6 +24,12 @@ export interface IStakingRewardsService {
    * Reads the balance in full orbs
    */
   readRewardsBalanceFullOrbs: (address: string) => Promise<number>;
+  /**
+   * Reads the amount of claimed rewards in full orbs
+   */
+  readClaimedRewardsFullOrbs: (address: string) => Promise<number>;
+
+  estimateFutureRewardsFullOrbs(address: string, durationInSeconds: number) : Promise<number>;
 
   // Writing
   setDelegatorsCutPercentage: (

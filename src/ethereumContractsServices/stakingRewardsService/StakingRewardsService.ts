@@ -5,7 +5,7 @@ import {
 } from "./IStakingRewardsService";
 import { PromiEvent, TransactionReceipt } from "web3-core";
 import Web3 from "web3";
-import { AbiItem } from "web3-utils";
+import {AbiItem, fromWei} from "web3-utils";
 import StakingRewardsContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/StakingRewards.json";
 import { StakingRewards } from "../../contracts/StakingRewards";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
@@ -98,6 +98,31 @@ export class StakingRewardsService implements IStakingRewardsService {
     return stakingRewardsBalanceFullOrbs;
   }
 
+  public async readClaimedRewardsFullOrbs(address: string): Promise<number> {
+    const delegatorStakingRewards = await this.stakingRewardsContract.methods
+        .delegatorsStakingRewards(address)
+        .call();
+    const guardianStakingRewards = await this.stakingRewardsContract.methods
+        .guardiansStakingRewards(address)
+        .call();
+
+    const claimedDelegatorsRewardsFullOrbs = fullOrbsFromWeiOrbs(delegatorStakingRewards.claimed);
+    const claimedGuardiansRewardsFullOrbs = fullOrbsFromWeiOrbs(guardianStakingRewards.claimed);
+
+    const totalClaimedRewards = claimedDelegatorsRewardsFullOrbs + claimedGuardiansRewardsFullOrbs;
+
+    return totalClaimedRewards;
+  }
+
+  public async estimateFutureRewardsFullOrbs(address: string, durationInSeconds: number) : Promise<number> {
+    return 0;
+
+    // const estimatedFutureRewards = this.stakingRewardsContract.methods.estimateFutureRewards(address, durationInSeconds).call();
+
+    // const estimatedRewardsInFullOrbs = fullOrbsFromWeiOrbs(estimatedFutureRewards);
+
+    // return estimatedRewardsInFullOrbs;
+  }
 
   // **** Writing ****
   public setDelegatorsCutPercentage(
