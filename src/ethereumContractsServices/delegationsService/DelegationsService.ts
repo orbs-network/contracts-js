@@ -31,8 +31,16 @@ export class DelegationsService implements IDelegationsService {
     return this.delegationsContract.methods.VOID_ADDR().call();
   }
 
-  async readUncappedDelegatedStakeInFullOrbs() : Promise<number> {
-    const uncappedDelegatedStake = await this.delegationsContract.methods.uncappedDelegatedStake('-1').call();
+  async readUncappedDelegatedStakeInFullOrbs(voidAddress?: string) : Promise<number> {
+    let voidAddressToUse: string;
+
+    if (voidAddress) {
+      voidAddressToUse = voidAddress;
+    } else {
+      voidAddressToUse = await this.readVoidAddress();
+    }
+
+    const uncappedDelegatedStake = await this.delegationsContract.methods.uncappedDelegatedStake(voidAddressToUse).call();
     const uncappedDelegatedStakeInFullOrbs = fullOrbsFromWeiOrbs(uncappedDelegatedStake);
 
     return uncappedDelegatedStakeInFullOrbs;
