@@ -5,6 +5,6 @@ export const ORBS_MAIN_NET_CONTRACT_ADDRESSES = {
     monthlySubscriptionPlanContract: '0xD598345F53cF691eb26fBEAb8aF515F9f7500f72',
     subscriptionsContract: '0x7089210F0ba3920C8443E26fb26D6e2f12E5216f',
     guardiansContract: '0xAB7F3d56Da621Cff1F5646642d7F79f6A201E4eD',
-    committeeService: '0x74CCe5C64292419C64bF0fbb71A4a1B7F9d89a3E',
+    committeeService: '0x30fa08665be48f14876e4ce2975f67aabfb68a77',
     delegationsService: '0x53d56b4b1EaEd898Be40cF445a715c55dDD6B09C',
 }
