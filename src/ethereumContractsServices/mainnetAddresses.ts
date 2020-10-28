@@ -1,6 +1,6 @@
 export const ORBS_MAIN_NET_CONTRACT_ADDRESSES = {
     ercToken: '0xff56Cc6b1E6dEd347aA0B7676C85AB0B3D08B0FA',
-    stakingRewardsContract: '0x281e714ee8bFD7208B07205fb93d7C9298f3a807',
+    stakingRewardsContract: '0x71D60f980B3ebF432CAA67962b859A12f3b8c5ea',
     staking: '0x01D59Af68E2dcb44e04C50e05F62E7043F2656C3',
     monthlySubscriptionPlanContract: '0xD598345F53cF691eb26fBEAb8aF515F9f7500f72',
     subscriptionsContract: '0x7089210F0ba3920C8443E26fb26D6e2f12E5216f',
