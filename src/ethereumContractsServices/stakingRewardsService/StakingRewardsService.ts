@@ -117,8 +117,6 @@ export class StakingRewardsService implements IStakingRewardsService {
   }
 
   public async estimateFutureRewardsFullOrbs(address: string, durationInSeconds: number) : Promise<number> {
-    return 0;
-
     const estimatedFutureRewards = await this.stakingRewardsContract.methods.estimateFutureRewards(address, durationInSeconds).call();
 
     const estimatedDelegatorRewardsInFullOrbs = fullOrbsFromWeiOrbs(estimatedFutureRewards.estimatedDelegatorStakingRewards);
