@@ -7,5 +7,8 @@ src/contracts
 # node modules
 node_modules
 
+# local
+src/local/
+
 # IDEA
 .idea
