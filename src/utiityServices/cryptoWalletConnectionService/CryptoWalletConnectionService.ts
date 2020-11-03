@@ -4,6 +4,7 @@ import { IEthereumProvider } from "./IEthereumProvider";
 import {fromWei} from "web3-utils";
 
 // TODO : FUTURE : O.L : Change all ethereum.<call> to the new standard events format.
+//                        Consider using AbstractProvider
 export class CryptoWalletConnectionService
   implements ICryptoWalletConnectionService {
   private readonly web3?: Web3;
