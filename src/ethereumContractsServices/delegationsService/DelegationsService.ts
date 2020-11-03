@@ -49,4 +49,8 @@ export class DelegationsService implements IDelegationsService {
   delegate(delegationTargetAddress: string): PromiEvent<TransactionReceipt> {
     return this.delegationsContract.methods.delegate(delegationTargetAddress).send();
   }
+
+  unDelegate(selfAddress: string): PromiEvent<TransactionReceipt> {
+    return this.delegate(selfAddress);
+  }
 }
