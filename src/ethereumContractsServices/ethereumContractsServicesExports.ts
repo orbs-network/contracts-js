@@ -20,7 +20,6 @@ export * from './monthlySubscriptionPlanService/MonthlySubscriptionPlanServiceCo
 // Guardians service
 export * from './guardiansService/IGuardiansService';
 export * from './guardiansService/GuardiansService';
-export * from './guardiansService/GuardiansServiceConstants';
 
 // Delegations service
 export * from './delegationsService/IDelegationsService';

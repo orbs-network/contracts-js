@@ -1,17 +1,14 @@
 import Web3 from "web3";
-import { AbiItem } from "web3-utils";
+import {AbiItem, sha3Raw} from "web3-utils";
 import GuardiansRegistrationContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/GuardiansRegistration.json";
 import {
   IGuardiansService,
   TGuardianInfoResponse,
-  TGuardianRegistrationPayload,
+  TGuardianRegistrationPayload, TGuardiansRegistrationContractMetadataKeys,
   TGuardianUpdatePayload,
 } from "./IGuardiansService";
 import { GuardiansRegistration } from "../../contracts/GuardiansRegistration";
 import { PromiEvent, TransactionReceipt } from "web3-core";
-import {
-  GUARDIANS_SERVICE_CONSTANTS
-} from "./GuardiansServiceConstants";
 import { ipv4ToHex } from "../../utils/ipHexConversionUtils";
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 
@@ -69,41 +66,21 @@ export class GuardiansService implements IGuardiansService {
     return guardianInfoResponse;
   }
 
-  public async readGuardianDistributionFrequencyInSeconds(
-    address: string
-  ): Promise<number> {
-    const rewardsFrequency = await this.guardiansRegistrationContract.methods
-      .getMetadata(address, GUARDIANS_SERVICE_CONSTANTS.metadataKeys.rewardsFrequency)
-      .call();
+  public async readMetaDataKeys() : Promise<TGuardiansRegistrationContractMetadataKeys> {
+    const detailsPageUrlMetaDataKey =  await this.guardiansRegistrationContract.methods.ID_FORM_URL_METADATA_KEY().call();
 
-    if (!rewardsFrequency || !rewardsFrequency.length) {
-      return GUARDIANS_SERVICE_CONSTANTS.emptyRewardsFrequencyValue;
-    }
+    const guardiansRegistrationContractMetadataKeys : TGuardiansRegistrationContractMetadataKeys = {
+      detailsPageUrl: detailsPageUrlMetaDataKey,
+    };
 
-    return parseInt(rewardsFrequency);
-  }
-
-  public async readGuardianId(address: string): Promise<string | null> {
-    const guardianId = await this.guardiansRegistrationContract.methods
-      .getMetadata(address, GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianId)
-      .call();
-
-    if (!guardianId || !guardianId.length) {
-      return null;
-    }
-
-    return guardianId;
-  }
-
-  public setGuardianId(guardianId: string): PromiEvent<TransactionReceipt> {
-    return this.guardiansRegistrationContract.methods
-      .setMetadata(GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianId, guardianId)
-      .send();
+    return guardiansRegistrationContractMetadataKeys;
   }
 
   public async readGuardianDetailsPageUrl(address: string): Promise<string | null> {
+    const metadataKeys = await this.readMetaDataKeys();
+
     const guardianDetailsPageUrl = await this.guardiansRegistrationContract.methods
-        .getMetadata(address, GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianDetailsPageUrl)
+        .getMetadata(address, metadataKeys.detailsPageUrl)
         .call();
 
     if (!guardianDetailsPageUrl || !guardianDetailsPageUrl.length) {
@@ -113,18 +90,12 @@ export class GuardiansService implements IGuardiansService {
     return guardianDetailsPageUrl;
   }
 
-  public setGuardianDetailsPageUrl(detailsPageUrl: string): PromiEvent<TransactionReceipt> {
-    return this.guardiansRegistrationContract.methods
-        .setMetadata(GUARDIANS_SERVICE_CONSTANTS.metadataKeys.guardianDetailsPageUrl, detailsPageUrl)
-        .send();
-  }
+  public async setGuardianDetailsPageUrl(detailsPageUrl: string): Promise<PromiEvent<TransactionReceipt>> {
+    const metadataKeys = await this.readMetaDataKeys();
 
-  public setGuardianDistributionFrequency(
-    frequencyInSeconds: number
-  ): PromiEvent<TransactionReceipt> {
     return this.guardiansRegistrationContract.methods
-      .setMetadata(GUARDIANS_SERVICE_CONSTANTS.metadataKeys.rewardsFrequency, frequencyInSeconds.toString())
-      .send();
+        .setMetadata(metadataKeys.detailsPageUrl, detailsPageUrl)
+        .send();
   }
 
   public registerGuardian(

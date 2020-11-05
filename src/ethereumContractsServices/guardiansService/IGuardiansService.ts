@@ -4,23 +4,12 @@ export interface IGuardiansService {
   setFromAccount: (address: string) => void;
   isRegisteredGuardian: (address: string) => Promise<boolean>;
   readGuardianInfo: (address: string) => Promise<TGuardianInfoResponse>;
-  readGuardianDistributionFrequencyInSeconds: (
-    address: string
-  ) => Promise<number>;
 
-  readGuardianId: (address: string) => Promise<string | null>;
-  setGuardianId: (guardianId: string) => PromiEvent<TransactionReceipt>;
+  readMetaDataKeys: () => Promise<TGuardiansRegistrationContractMetadataKeys>;
 
   readGuardianDetailsPageUrl: (address: string) => Promise<string | null>;
-  setGuardianDetailsPageUrl: (detailsPageUrl: string) => PromiEvent<TransactionReceipt>;
+  setGuardianDetailsPageUrl: (detailsPageUrl: string) => Promise<PromiEvent<TransactionReceipt>>;
 
-  /**
-   *
-   * @deprecated
-   */
-  setGuardianDistributionFrequency: (
-    frequencyInSeconds: number
-  ) => PromiEvent<TransactionReceipt>;
   registerGuardian: (
     guardianRegistrationPayload: TGuardianRegistrationPayload
   ) => PromiEvent<TransactionReceipt>;
@@ -28,6 +17,10 @@ export interface IGuardiansService {
     guardianUpdatePayload: TGuardianUpdatePayload
   ) => PromiEvent<TransactionReceipt>;
   unregisterGuardian: () => PromiEvent<TransactionReceipt>;
+}
+
+export type TGuardiansRegistrationContractMetadataKeys = {
+  detailsPageUrl: string;
 }
 
 export type TGuardianInfoPayload = {
