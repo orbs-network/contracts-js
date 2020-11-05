@@ -12,20 +12,20 @@ import { AbiItem } from 'web3-utils';
 import {ORBS_MAIN_NET_CONTRACT_ADDRESSES} from "../mainnetAddresses";
 import {IOrbsTokenService, OrbsAllowanceChangeCallback} from "./IOrbsTokenService";
 import Erc20ContractJson from "@orbs-network/orbs-ethereum-contracts-v2/build/contracts/ERC20.json";
-import { Erc20 } from "../../contracts/ERC20";
+import { ERC20 } from "../../contracts/ERC20";
 import {TUnsubscribeFunction} from "../contractsTypes/contractTypes";
 import {getUnsubscribePromise} from '../../utils/erc20EventsUtils';
 
 const MAIN_NET_ERC_TOKEN_ADDRESS = ORBS_MAIN_NET_CONTRACT_ADDRESSES.ercToken;
 
 export class OrbsTokenService implements IOrbsTokenService {
-  private erc20TokenContract: Erc20;
+  private erc20TokenContract: ERC20;
 
   constructor(private web3: Web3, erc20address: string = MAIN_NET_ERC_TOKEN_ADDRESS) {
     this.erc20TokenContract = (new this.web3.eth.Contract(
         Erc20ContractJson.abi as AbiItem[],
         erc20address
-    ) as any) as Erc20;
+    ) as any) as ERC20;
   }
 
   // CONFIG //
@@ -57,7 +57,6 @@ export class OrbsTokenService implements IOrbsTokenService {
           spender: [spenderAddress],
         },
       },
-      // async (error: Error, event: ITypedEventData<IApprovalEventValues>) => {
       async (error: Error, event) => {
         if (error) {
           callback(error, BigInt(0));
