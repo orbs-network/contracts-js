@@ -6,7 +6,7 @@ Orbs contracts js is a library that provides easy to use interfaces to communica
 ## Installation
 
 ```bash
-npm install @orbs-universe/contracts-js
+npm install @orbs-network/contracts-js
 ```
 
 ## Usage
