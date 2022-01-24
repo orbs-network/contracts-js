@@ -1,4 +1,4 @@
-export interface IElectionsService {}
+
 
 export interface IGetSettingsResult {
   minSelfStakePercentMille: string;
@@ -7,4 +7,8 @@ export interface IGetSettingsResult {
   0: string;
   1: string;
   2: string;
+}
+
+export interface IElectionsService {
+  getSettings: () => Promise<IGetSettingsResult>;
 }
