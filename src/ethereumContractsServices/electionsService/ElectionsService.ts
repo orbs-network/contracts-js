@@ -5,7 +5,7 @@ import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 import { ORBS_MAIN_NET_CONTRACT_ADDRESSES } from "../mainnetAddresses";
 
-const MAIN_NET_COMMITTEE_CONTRACT_ADDRESS =
+const MAIN_NET_ELECTIONS_CONTRACT_ADDRESS =
   ORBS_MAIN_NET_CONTRACT_ADDRESSES.electionsService;
 
 export class ElectionsService implements IElectionsService {
@@ -13,7 +13,7 @@ export class ElectionsService implements IElectionsService {
 
   constructor(
     private web3: Web3,
-    address: string = MAIN_NET_COMMITTEE_CONTRACT_ADDRESS
+    address: string = MAIN_NET_ELECTIONS_CONTRACT_ADDRESS
   ) {
     this.contarct = new this.web3.eth.Contract(
       ElectionsContractJson.abi as AbiItem[],
