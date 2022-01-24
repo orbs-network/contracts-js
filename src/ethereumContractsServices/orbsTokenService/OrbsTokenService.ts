@@ -36,7 +36,7 @@ export class OrbsTokenService implements IOrbsTokenService {
   // READ //
   async readBalance(address: string) : Promise<bigint> {
     const balance = await this.erc20TokenContract.methods.balanceOf(address);
-    return BigInt(balance);
+    return BigInt(balance as any);
   }
 
   async readAllowance(ownerAddress: string, spenderAddress: string): Promise<bigint> {

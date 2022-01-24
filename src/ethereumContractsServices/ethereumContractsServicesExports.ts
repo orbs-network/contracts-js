@@ -36,3 +36,7 @@ export * from './stakingService/StakingService';
 // Staking Rewards
 export * from './stakingRewardsService/IStakingRewardsService';
 export * from './stakingRewardsService/StakingRewardsService';
+
+// elections service
+export * from './electionsService/ElectionsService'
+export * from './electionsService/IElectionsService'
