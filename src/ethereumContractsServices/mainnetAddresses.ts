@@ -7,4 +7,5 @@ export const ORBS_MAIN_NET_CONTRACT_ADDRESSES = {
     guardiansContract: '0xce97f8c79228c53b8b9ad86800a493d1e7e5d1e3',
     committeeService: '0x1a4c7891d2d04b2cd413b98bc3283c8d992f5fa7',
     delegationsService: '0xB97178870F39d4389210086E4BcaccACD715c71d',
+    electionsService: '0x02Ca9F2c5dD0635516241efD480091870277865b'
 }
